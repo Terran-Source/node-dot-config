@@ -1,0 +1,31 @@
+{
+  "name": "dotconfig",
+  "version": "0.1.0",
+  "description": "App configuration made simple for Node.js",
+  "main": "config.js",
+  "scripts": {
+    "test": "mocha tests/**.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Terran-Source/dotconfig.git"
+  },
+  "keywords": [
+    "configuration",
+    "config",
+    "dotconfig"
+  ],
+  "author": "Tamal Patra <patra.tamal@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Terran-Source/dotconfig/issues"
+  },
+  "homepage": "https://github.com/Terran-Source/dotconfig#readme",
+  "dependencies": {
+    "type-detect": "^4.0.8"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
+}
