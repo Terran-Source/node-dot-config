@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 //const type = require('type-detect');
 
 describe('#config', function() {
-  it('correct', function() {
+  it("require('config') should return correct instance of config", function() {
     // arrange
     const config = require('../config');
     // act
