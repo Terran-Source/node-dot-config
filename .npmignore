@@ -11,3 +11,5 @@ tests/
 .vscode/
 .nvmrc
 .jshintrc
+.editorconfig
+.prettierrc
