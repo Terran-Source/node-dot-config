@@ -4,7 +4,9 @@
   "description": "App configuration made simple for Node.js",
   "main": "config.js",
   "scripts": {
-    "test": "mocha tests/**.spec.js"
+    "bdd-test": "cd tests && mocha ./**.spec.js",
+    "unit-test": "mocha ./lib/**.spec.js",
+    "test": "npm run bdd-test"
   },
   "repository": {
     "type": "git",

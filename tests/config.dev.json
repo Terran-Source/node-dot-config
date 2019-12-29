@@ -2,5 +2,6 @@
   "baseKey": "devValue",
   "subKey": {
     "baseKey": "devValue"
-  }
+  },
+  "devKey": "devValue"
 }
