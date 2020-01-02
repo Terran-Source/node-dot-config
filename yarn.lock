@@ -275,9 +275,9 @@ inherits@2:
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
 interpolate-json@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/interpolate-json/-/interpolate-json-0.3.0.tgz#8eac4efb7ba8561e438e41ad068787c25f4a4417"
-  integrity sha512-LQhHkOeFq3yzIQXTDDyI2KrxDyNyV/D4icGzRCm2vy6sD7BHNAYal1pVcJRiev8M+3jmXArM7TMHb35q82XBQQ==
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/interpolate-json/-/interpolate-json-0.3.1.tgz#da5db04905389cd1fd123af72320cca1112e2f49"
+  integrity sha512-s77AF26eiBFF9mNjOWPXfpF8S3FuZQuyOSBfopBdoIRLIMu2OV/zUU3lXscp+/9Hi6KxCJZeR2tvhEo//GOwmA==
   dependencies:
     extend "^3.0.2"
     type-detect "^4.0.8"
