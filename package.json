@@ -1,6 +1,6 @@
 {
   "name": "@terran-source/dotconfig",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "App configuration made simple for Node.js",
   "main": "config.js",
   "scripts": {
