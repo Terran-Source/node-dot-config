@@ -2,8 +2,10 @@ os: linux
 dist: bionic
 language: node_js
 node_js:
+  - 8
+  - lts/carbon
   - lts/dubnium
-  # - lts/erbium
+  - lts/erbium
 before_install:
   # latest npm, gulp
   - npm i -g gulp-cli # npm yarn
@@ -30,6 +32,7 @@ deploy:
   on:
     branch: master
     tags: true
+    condition: $TRAVIS_NODE_VERSION = 8
   tag: latest
   provider: npm
   email:
