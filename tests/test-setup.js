@@ -7,5 +7,10 @@ before(() => {
 
 beforeEach(() => {
   // global reset
+  this.config.debug();
+});
+
+afterEach(() => {
+  // global reset
   this.config.reset();
 });

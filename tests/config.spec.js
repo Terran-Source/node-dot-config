@@ -10,7 +10,7 @@ describe('#config', function() {
   });
   it('config.load should return dev config', function() {
     // act
-    const result = context.config.load({ debug: true });
+    const result = context.config.load();
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -29,7 +29,7 @@ describe('#config', function() {
   });
   it('config.load(test) should return test config', function() {
     // act
-    const result = context.config.load('test', { debug: true });
+    const result = context.config.load('test');
     // assert
     expect(result).to.be.a('config');
     console.log(

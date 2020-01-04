@@ -1352,10 +1352,10 @@ ini@^1.3.4, ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-interpolate-json@^0.4.7:
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/interpolate-json/-/interpolate-json-0.4.7.tgz#7bef4b7bd9df5ea130c8375b047293022779e17e"
-  integrity sha512-rkJgTD6JDNXoJYF7EIRI1GfpZdjtwfNcbKqfqzDIItE29DZX7EjQOSlgcg2C6PBx2x6PSrZLuKIQADOkc6G5ag==
+interpolate-json@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/interpolate-json/-/interpolate-json-0.5.0.tgz#1cd76d09c59f39503e25d10445792256dc94feb2"
+  integrity sha512-F5imO+cczVk2+YGug/YArGjT7sprKC/iYeJaDCyGgsWREJY0Ntu0EUBWolvZxlCGe0jyf5caVGgQDZGfeqm+vQ==
   dependencies:
     extend "^3.0.2"
     type-detect "^4.0.8"
