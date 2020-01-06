@@ -1192,9 +1192,9 @@ global-prefix@^1.0.1:
     which "^1.2.14"
 
 globby@^10.0.1:
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-10.0.1.tgz#4782c34cb75dd683351335c5829cc3420e606b22"
-  integrity sha512-sSs4inE1FB2YQiymcmTv6NWENryABjUNPeWhOvmn4SjtKybglsyPZxFB3U1/+L1bYi0rNZDqCLlHyLYDl1Pq5A==
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-10.0.2.tgz#277593e745acaa4646c3ab411289ec47a0392543"
+  integrity sha512-7dUi7RvCoT/xast/o/dLN53oqND4yk0nsHkhRgn9w65C4PofCLOoJ39iSOg+qVDdWQPIEj+eszMHQ+aLVwwQSg==
   dependencies:
     "@types/glob" "^7.1.1"
     array-union "^2.1.0"
@@ -1385,10 +1385,10 @@ ini@^1.3.4, ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-interpolate-json@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/interpolate-json/-/interpolate-json-0.6.0.tgz#3ece91f61b1e5819a21d1ec9b3361a464d75469e"
-  integrity sha512-pD5gMJdKl5tvRUOqfthiZZh++OmwFs01R2hZYeNfAxpy2bS+hmkQ/VPm2jHls9aZEzDoVJKzgecM8bEh5WVZcg==
+interpolate-json@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/interpolate-json/-/interpolate-json-0.6.4.tgz#bcd5da08568dad2beb882cdc23b30979e1896c72"
+  integrity sha512-Lmpyrk4QKhuWYDdHDs8iAgTY5u/BYh0nfBY+InV2KZ9MAB5wGmqKgeepNsusk/0jbb71qgfNDVc30HR3R5Ri2Q==
   dependencies:
     extend "^3.0.2"
     type-detect "^4.0.8"
