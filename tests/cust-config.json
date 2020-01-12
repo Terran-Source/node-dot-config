@@ -1,0 +1,7 @@
+{
+  "key": "value",
+  "baseKey": "baseValue",
+  "subKey": {
+    "baseKey": "baseValue"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "baseKey": "custom",
+  "subKey": {
+    "baseKey": "custom"
+  },
+  "testKey": "custom"
+}
