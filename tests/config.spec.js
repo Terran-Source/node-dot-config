@@ -6,9 +6,9 @@ describe('#config', function() {
     // assert
     expect(context.config).to.be.a('config');
   });
-  it('config.load() should return {env: dev} config', function() {
+  it('config.loadConfig() should return {env: dev} config', function() {
     // act
-    const result = context.config.load();
+    const result = context.config.loadConfig();
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -28,9 +28,9 @@ describe('#config', function() {
       baseKey: 'devValue'
     });
   });
-  it('config.load(test) should return {env: test} config', function() {
+  it('config.loadConfig(test) should return {env: test} config', function() {
     // act
-    const result = context.config.load('test');
+    const result = context.config.loadConfig('test');
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -50,9 +50,9 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load({env: test}) should return {env: test} config', function() {
+  it('config.loadConfig({env: test}) should return {env: test} config', function() {
     // act
-    const result = context.config.load({ env: 'test' });
+    const result = context.config.loadConfig({ env: 'test' });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -72,11 +72,11 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load(true, {env: test}) for {NODE_ENV: dev} should return {env: test} config', function() {
+  it('config.loadConfig(true, {env: test}) for {NODE_ENV: dev} should return {env: test} config', function() {
     // arrange
     process.env.NODE_ENV = 'dev';
     // act
-    const result = context.config.load(true, { env: 'test' });
+    const result = context.config.loadConfig(true, { env: 'test' });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -96,9 +96,9 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load("test.ext") should return {env: test} config, even in {env: dev}', function() {
+  it('config.loadConfig("test.ext") should return {env: test} config, even in {env: dev}', function() {
     // act
-    const result = context.config.load('config.test.json');
+    const result = context.config.loadConfig('config.test.json');
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -118,11 +118,11 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load(true) for {NODE_ENV: test} should return {env: test} config', function() {
+  it('config.loadConfig(true) for {NODE_ENV: test} should return {env: test} config', function() {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.load(true);
+    const result = context.config.loadConfig(true);
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -142,11 +142,11 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load() for {NODE_ENV: test} should return {env: dev} config', function() {
+  it('config.loadConfig() for {NODE_ENV: test} should return {env: dev} config', function() {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.load();
+    const result = context.config.loadConfig();
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -166,11 +166,11 @@ describe('#config', function() {
       baseKey: 'devValue'
     });
   });
-  it('config.load({env: dev}) for {NODE_ENV: test} should return {env: dev} config', function() {
+  it('config.loadConfig({env: dev}) for {NODE_ENV: test} should return {env: dev} config', function() {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.load({ env: 'dev' });
+    const result = context.config.loadConfig({ env: 'dev' });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -190,11 +190,11 @@ describe('#config', function() {
       baseKey: 'devValue'
     });
   });
-  it('config.load(true, {env: dev}) for {NODE_ENV: test} should return {env: dev} config', function() {
+  it('config.loadConfig(true, {env: dev}) for {NODE_ENV: test} should return {env: dev} config', function() {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.load(true, { env: 'dev' });
+    const result = context.config.loadConfig(true, { env: 'dev' });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -214,9 +214,9 @@ describe('#config', function() {
       baseKey: 'devValue'
     });
   });
-  it('config.load("test", {env: dev}) should return {env: dev} config', function() {
+  it('config.loadConfig("test", {env: dev}) should return {env: dev} config', function() {
     // act
-    const result = context.config.load('test', { env: 'dev' });
+    const result = context.config.loadConfig('test', { env: 'dev' });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -236,9 +236,9 @@ describe('#config', function() {
       baseKey: 'devValue'
     });
   });
-  it('config.load("custom-filename.ext") should return only custom config file', function() {
+  it('config.loadConfig("custom-filename.ext") should return only custom config file', function() {
     // act
-    const result = context.config.load('cust-config.json');
+    const result = context.config.loadConfig('cust-config.json');
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -255,9 +255,11 @@ describe('#config', function() {
       baseKey: 'baseValue'
     });
   });
-  it('config.load("custom-filename.ext") for {env: test} should return custom {env: test} config', function() {
+  it('config.loadConfig("custom-filename.ext") for {env: test} should return custom {env: test} config', function() {
     // act
-    const result = context.config.load('cust-config.json', { env: 'test' });
+    const result = context.config.loadConfig('cust-config.json', {
+      env: 'test'
+    });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -277,11 +279,13 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load(true) for {NODE_ENV: test, path: "custom-filename.ext"} should return custom {env: test} config', function() {
+  it('config.loadConfig(true) for {NODE_ENV: test, path: "custom-filename.ext"} should return custom {env: test} config', function() {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.load(true, { path: 'cust-config.json' });
+    const result = context.config.loadConfig(true, {
+      path: 'cust-config.json'
+    });
     // assert
     expect(result).to.be.a('config');
     console.log(
@@ -301,9 +305,9 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load({env: test, path: "custom-filename.ext"}) should return custom {env: test} config', function() {
+  it('config.loadConfig({env: test, path: "custom-filename.ext"}) should return custom {env: test} config', function() {
     // act
-    const result = context.config.load({
+    const result = context.config.loadConfig({
       path: 'cust-config.json',
       env: 'test'
     });
@@ -326,9 +330,9 @@ describe('#config', function() {
       baseKey: 'testValue'
     });
   });
-  it('config.load({env: custom, path: "custom-filename.ext"}) should return custom {env: custom} config', function() {
+  it('config.loadConfig({env: custom, path: "custom-filename.ext"}) should return custom {env: custom} config', function() {
     // act
-    const result = context.config.load({
+    const result = context.config.loadConfig({
       path: 'cust-config.json',
       env: 'custom'
     });

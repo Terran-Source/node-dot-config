@@ -2,9 +2,9 @@ const context = require('./test-setup');
 const expect = require('chai').expect;
 
 describe('#config-chaining', function() {
-  it('config.load(test) should return config', function() {
+  it('config.loadConfig(test) should return config', function() {
     // act
-    const result = context.config.load('test');
+    const result = context.config.loadConfig('test');
     // assert
     expect(result).to.be.a('config');
     expect(process.appConfig).to.be.a('Object').and.not.be.undefined;
@@ -25,7 +25,7 @@ describe('#config-chaining', function() {
     // act
     const result = context.config
       .setParser('abcd', require('../lib/parsers/parse.json'), 'con', true)
-      .load();
+      .loadConfig();
     // assert
     expect(result).to.be.a('config');
     expect(process.appConfig).to.be.a('Object').and.not.be.undefined;
@@ -34,7 +34,7 @@ describe('#config-chaining', function() {
     // act
     const result = context.config
       .setParser('xkcd', require('../lib/parsers/parse.json'), 'con', true)
-      .load();
+      .loadConfig();
     // assert
     expect(result).to.be.a('config');
     expect(process.appConfig).to.be.deep.equal({});
