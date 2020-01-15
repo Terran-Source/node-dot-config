@@ -246,7 +246,7 @@ The encoding of the configuration file, supplied in [`path`](#path).
 - type: `string`
 - default: `dev`
 
-In a multi-environment setup (e.g. dev, test, uat, prod), this is the specifier for environment type. In practical case, it seems more logical to not set this one through [`options`](#options), but to set the `NODE_ENV` environment variable and pass true as first parameter to [`loadConfig`](#Definition) function (see [Example](#boolean)).
+In a multi-environment setup (e.g. dev, test, uat, prod), this is the specifier for environment type. In practical case, it seems more logical to not set this one through [`options`](#options), but to set the `NODE_ENV` environment variable and pass true as first parameter to [`loadConfig`](#Definition) function (see [Example](#boolean-true)).
 
 ###### path
 
