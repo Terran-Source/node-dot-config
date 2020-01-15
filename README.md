@@ -35,17 +35,17 @@ const { loadConfig } = require('@terran-source/dotconfig');
 /**
 *    App Directory structure
 *    
-*    app
-*    |_ package.json
-*    |_ index.js
-*    |_ app-config.json
-*    |_ app-config.dev.json
-*    |_ app-config.test.json
-*    |_ app-config.prod.json
+*    app/
+*     | -- package.json
+*     | -- index.js
+*     | -- app-config.json
+*     | -- app-config.dev.json
+*     | -- app-config.test.json
+*     | -- app-config.prod.json
 *    
 */
 
-//  app-config.json
+// ** app-config.json **
 {
   "scheme": "http",
   "server": "localhost",
@@ -58,19 +58,19 @@ const { loadConfig } = require('@terran-source/dotconfig');
   "url": "${scheme}://${=${user.name}.toLowerCase()=}:${= encodeURIComponent(${user.password}) =}@${server}:${port}"
 }
 
-//  app-config.dev.json
+// ** app-config.dev.json **
 {
   "baseKey": "devValue"
 }
 
-//  app-config.test.json
+// ** app-config.test.json **
 {
   "scheme": "https",
   "server": "test.example.com",
   "baseKey": "testValue"
 }
 
-//  app-config.prod.json
+// ** app-config.prod.json **
 {
   "scheme": "https",
   "server": "${APP_SERVER_NAME}",
@@ -78,7 +78,7 @@ const { loadConfig } = require('@terran-source/dotconfig');
   "baseKey": "${BASE_KEY}"
 }
 
-// index.js
+// ** index.js **
 // declare the varible at the beginning
 const { loadConfig } = require('@terran-source/dotconfig');
 
@@ -111,13 +111,14 @@ parsed: {
 url: http://devuser:P%40ssw0rd@localhost:8080
 ```
 
-To load environment specific configurations (recommended):
+To load environment specific configurations:
 ```javascript
 let { parsed, error } = loadConfig({ env: 'test', path: 'app-config.json' });
 // or
 let { parsed, error } = loadConfig('test', { path: 'app-config.json' });
 // or
-let { parsed, error } = loadConfig(true, { path: 'app-config.json' }); // set Environment variable `NODE_ENV=test` before run
+// set Environment variable `NODE_ENV=test` and then run (recommended)
+let { parsed, error } = loadConfig(true, { path: 'app-config.json' });
 
 console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
 console.log(`url: ${process.appConfig.url}`);
@@ -150,19 +151,43 @@ The `loadConfig` function takes at most 2 parameters
 
 ###### boolean: true
 
-xxxx
+If the `NODE_ENV` environment variable is set as the [`environment`](#environment), then passing `true` as first parameter signifies to set [`env`](#env) to  `NODE_ENV` value.
+
+```javascript
+// ** index.js **
+const { loadConfig } = require();
+loadConfig(true, { path: 'app-config.json' });
+// do your job
+db.connect(process.appConfig.url);
+```
+
+```bash
+# to load test config
+NODE_ENV=test node index.js
+# to load uat config
+NODE_ENV=uat node index.js
+# to load prod config
+NODE_ENV=prod node index.js
+```
 
 ###### environment
 
 - example: `dev`, `test`, `staging`, `prod`
 
-xxxx
+The application environement name, which to load the configuration file for. Should be lowercase (by tradition) & not contain any space.
 
 ###### filename (with extension)
 
 - example: "custom-config-file.ext"
 
-xxxx
+The configuration file path (either relative or absolute).
+
+```javascript
+const { loadConfig } = require('@terran-source/dotconfig');
+loadConfig('app-config.json');
+```
+
+
 
 #### options
 
@@ -188,15 +213,18 @@ more in [`Configurations`](#Configurations)
 ```javascript
 {
   parsed: {}, // same as process.appConfig if succeed
-  error: null // or an Error object with `message`
+  error: null // or an Error object with `message` if anything goes wrong
 }
 ```
 
-xxxx
+If it succeeds to load the configuration file & to parse the information containing within, it sets the `process.appConfig` with the value & will return with an Object with 
+
+- `parsed` key with the same value as `process.appConfig`. 
+- `error` key, which is `null` if succeeds or the error details if fails.
 
 #### Configurations
 
-xxxx
+The [`options`](#options) setup.
 
 ###### debug
 
@@ -211,28 +239,31 @@ Set it `true` to turn on logging to help debug why certain things are not workin
 - type: `string`
 - default: `utf8`
 
-xxxx
+The encoding of the configuration file, supplied in [`path`](#path).
 
 ###### env
 
 - type: `string`
 - default: `dev`
 
-xxxx
+In a multi-environment setup (e.g. dev, test, uat, prod), this is the specifier for environment type. In practical case, it seems more logical to not set this one through [`options`](#options), but to set the `NODE_ENV` environment variable and pass true as first parameter to [`loadConfig`](#Definition) function (see [Example](#boolean)).
 
 ###### path
 
 - type: `string`
 - default: `config.json`
 
-xxxx
+The path of the configuration file. It can either be a relative path or an absolute one.
 
 ###### type
 
 - type: `string`
 - default: `json`
+- supported types: `json`, `yml`, `env`
 
-xxxx
+The configuration file extension.
+
+> Note: for .yaml files, type: 'yml' in [`options`](#options) should be provided
 
 ### Functions
 
