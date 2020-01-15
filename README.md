@@ -82,7 +82,7 @@ const { loadConfig } = require('@terran-source/dotconfig');
 // declare the varible at the beginning
 const { loadConfig } = require('@terran-source/dotconfig');
 
-// load process.env.appConfig
+// load process.appConfig
 let { parsed, error } = loadConfig('app-config.json');
 
 if (error) {
@@ -285,6 +285,78 @@ dotconfig.loadConfig(opt);
 const { loadConfig } = require('@terran-source/dotconfig');
 loadConfig(opt);
 ```
+
+#### IParser
+
+IParser lets others to implement a custom type of parser (like toml, xml etc.)
+
+```javascript
+// ** custom-parser.js **
+const { IParser } = require('@terran-source/dotconfig');
+
+// declare a class that extends IParser
+class CustomParseClass extends IParser {
+  constructor() {
+    super();
+  }
+
+  // declare a parse function, that takes two parameters
+  parse(filePath, encoding) {
+    let json = // read filePath & create a json Object
+    return json;
+  }
+}
+
+module.exports = new CustomParseClass();
+
+// ** somewhere.js **
+const { loadConfig, setParser } = require('@terran-source/dotconfig');
+const customParser = require('/path/to/custom-parser');
+
+// define customParser for customType
+setParser('customType', customParser);
+
+// now a configuration file with extension `.customType` can be loaded
+loadConfig('custom-app-config.customType');
+db.connect(process.appConfig.url);
+```
+
+#### setParser()
+
+- syntax: setParser(customType, customParser, deafultFileName = null, resetType = false)
+
+  - *customType* - {type: `string`} It generally represents the file extension
+
+  - *customParser* - {type: [`IParser`](#IParser)} An [`IParser`](#IParser) implementation
+
+  - *deafultFileName* - {type: `string`, default: `null`} (optional) default configurtion filename (without extension)
+
+  - *resetType* - {type: `Boolean`} (optional) make the supplied customType as the default *type* when the config.loadConfig() runs next time
+
+```javascript
+  // ** somewhere.js **
+const { loadConfig, setParser } = require('@terran-source/dotconfig');
+const customParser = require('/path/to/custom-parser'); // custom-parser should implement IParser
+
+// define customParser for customType & make it default
+setParser('customType', customParser, 'custom-config-file', true);
+
+// The following commad now loads
+//   - `custom-config-file.customType`
+//   - `custom-config-file.dev.customType`
+loadConfig();
+
+// or if NODE_ENV is set to a different environment, e.g. 'test'
+// it loads
+//   - `custom-config-file.customType`
+//   - `custom-config-file.test.customType`
+loadConfig(true);
+
+// Now process.appConfig is available
+db.connect(process.appConfig.url);
+```
+
+  
 
 #### debug()
 
