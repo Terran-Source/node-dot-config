@@ -60,7 +60,8 @@ const { loadConfig } = require('@terran-source/dotconfig');
 
 // ** app-config.dev.json **
 {
-  "baseKey": "devValue"
+  "baseKey": "devValue",
+   "someDevKey": "someDevValue"
 }
 
 // ** app-config.test.json **
@@ -106,12 +107,21 @@ parsed: {
     "name": "DevUser",
     "password": "P@ssw0rd"
   },
-  "url": "http://devuser:P%40ssw0rd@localhost:8080"
+  "url": "http://devuser:P%40ssw0rd@localhost:8080",
+   "someDevKey": "someDevValue"
 }
 url: http://devuser:P%40ssw0rd@localhost:8080
 ```
 
+Let's break it up:
+
+`USER_NAME` & `USER_PASSWORD` are set through environment variable. This will replace the placeholders `${USER_NAME}` & `${USER_PASSWORD}` in *app-config.json*. The [`environment`](#env) is not specified. Hence, it'll be set as default value `dev`. Now, the [`loadConfig`](#loadConfig) function will search for any `dev` environment specific configuration (i.e. any file with name *app-config.`dev`.json* in the same directory, where it finds the original *app-config.json*). If it finds the additional file, it loads the details & overwrite anything, that matches with the base configuration or add anything, that is not present. i.e.
+
+- `"baseKey": "baseValue"` becomes `"baseKey": "devValue"`
+- additional `"someDevKey": "someDevValue"` key is added
+
 To load environment specific configurations:
+
 ```javascript
 let { parsed, error } = loadConfig({ env: 'test', path: 'app-config.json' });
 // or
@@ -124,7 +134,7 @@ console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
 console.log(`url: ${process.appConfig.url}`);
 ```
 ```bash
-# execute: 
+# execute: for  loadConfig(true, { path: 'app-config.json' })
 NODE_ENV=test USER_NAME=TestUser USER_PASSWORD=P@ssw0rd node index.js
 # output:
 parsed: {
@@ -151,7 +161,7 @@ The `loadConfig` function takes at most 2 parameters
 
 ###### boolean: true
 
-If the `NODE_ENV` environment variable is set as the [`environment`](#environment), then passing `true` as first parameter signifies to set [`env`](#env) to  `NODE_ENV` value.
+If the `NODE_ENV` environment variable is set as the [`environment`](#environment), then passing `true` as first parameter signifies to get [`env`](#env) from `NODE_ENV` environment value.
 
 ```javascript
 // ** index.js **
@@ -172,9 +182,9 @@ NODE_ENV=prod node index.js
 
 ###### environment
 
-- example: `dev`, `test`, `staging`, `prod`
+- example: `dev`, `test`, `uat`, `staging`, `prod` etc.
 
-The application environement name, which to load the configuration file for. Should be lowercase (by tradition) & not contain any space.
+The application environment name, which to load the configuration file for. Should be lowercase (by tradition) & not contain any space or special character.
 
 ###### filename (with extension)
 
@@ -186,8 +196,6 @@ The configuration file path (either relative or absolute).
 const { loadConfig } = require('@terran-source/dotconfig');
 loadConfig('app-config.json');
 ```
-
-
 
 #### options
 
