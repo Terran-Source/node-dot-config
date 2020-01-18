@@ -267,7 +267,7 @@ The path of the configuration file. It can either be a relative path or an absol
 
 - type: `string`
 - default: `json`
-- supported types: `json`, `yml`, `env`
+- supported types: `json`, ~`yml`~, ~`env`~ (yml & env not yet supported)
 
 The configuration file extension.
 
