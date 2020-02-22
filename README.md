@@ -267,11 +267,9 @@ The path of the configuration file. It can either be a relative path or an absol
 
 - type: `string`
 - default: `json`
-- supported types: `json`, ~`yml`~, ~`env`~ (yml & env not yet supported)
+- supported types: `json`, ~`env`~ (env development undergoing)
 
 The configuration file extension.
-
-> Note: for .yaml files, type: 'yml' in [`options`](#options) should be provided
 
 ### Functions
 
