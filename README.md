@@ -6,9 +6,9 @@ App configuration made simple for Node.js
 
 Supports:
 
-1. app configuration file  of type `json` or `yml` or `env` (custom type parser's can also be implemented through implementing [`IParser`](#IParser) & using [`setParser`](#setParser))
+1. app configuration file  of type `json` or `env` (custom type parser's can also be implemented through implementing [`IParser`](#IParser) & using [`setParser`](#setParser))
 2. [`Environment`](#env) specific configuration overloading
-3. Now with the power of [interpolate-json](https://www.npmjs.com/package/interpolate-json) to support interpolation (or parameter substitution) inside app-configuration
+3. Now with the power of [interpolate-json](https://www.npmjs.com/package/interpolate-json) to support interpolation (or parameter substitution) inside app-configuration (strongly recommend to go through the [documentation](https://www.npmjs.com/package/interpolate-json) to know the full power of interpolation)
 
 ## Install
 
