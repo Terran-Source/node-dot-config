@@ -1,4 +1,4 @@
-# dotconfig  [![NPM version](https://img.shields.io/npm/v/@terran-source/dotconfig.svg?style=plastic)](https://www.npmjs.com/package/@terran-source/dotconfig)
+# dotconfig [![NPM version](https://img.shields.io/npm/v/@terran-source/dotconfig.svg?style=plastic)](https://www.npmjs.com/package/@terran-source/dotconfig)
 
 [![Travis (.org)](https://img.shields.io/travis/Terran-Source/dotconfig?logo=travis&style=plastic)](https://travis-ci.org/Terran-Source/dotconfig) [![node](https://img.shields.io/node/v/@terran-source/dotconfig?logo=nodejs&style=plastic)](https://www.npmjs.com/package/@terran-source/dotconfig) [![GitHub](https://img.shields.io/github/license/Terran-Source/dotconfig?logo=github&style=plastic)](LICENSE)
 
@@ -6,7 +6,7 @@ App configuration made simple for Node.js
 
 Supports:
 
-1. app configuration file  of type `json` or `env` (custom type parser's can also be implemented through implementing [`IParser`](#IParser) & using [`setParser`](#setParser))
+1. app configuration file of type `json` or `env` (custom type parser's can also be implemented through implementing [`IParser`](#iparser) & using [`setparser`](#setParser))
 2. [`Environment`](#env) specific configuration overloading
 3. Now with the power of [interpolate-json](https://www.npmjs.com/package/interpolate-json) to support interpolation (or parameter substitution) inside app-configuration (strongly recommend to go through the [documentation](https://www.npmjs.com/package/interpolate-json) to know the full power of interpolation)
 
@@ -34,7 +34,7 @@ const { loadConfig } = require('@terran-source/dotconfig');
 ```javascript
 /**
 *    App Directory structure
-*    
+*
 *    app/
 *     | -- package.json
 *     | -- index.js
@@ -42,7 +42,7 @@ const { loadConfig } = require('@terran-source/dotconfig');
 *     | -- app-config.dev.json
 *     | -- app-config.test.json
 *     | -- app-config.prod.json
-*    
+*
 */
 
 // ** app-config.json **
@@ -94,10 +94,11 @@ if (error) {
 console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
 console.log(`url: ${process.appConfig.url}`);
 ```
+
 ```bash
-# execute using: 
+# execute using:
 USER_NAME=DevUser USER_PASSWORD=P@ssw0rd node index.js
-# output:  
+# output:
 parsed: {
   "scheme": "http",
   "server": "localhost",
@@ -115,7 +116,7 @@ url: http://devuser:P%40ssw0rd@localhost:8080
 
 Let's break it up:
 
-`USER_NAME` & `USER_PASSWORD` are set through environment variable. This will replace the placeholders `${USER_NAME}` & `${USER_PASSWORD}` in *app-config.json*. The [`environment`](#env) is not specified. Hence, it'll be set as default value `dev`. Now, the [`loadConfig`](#loadConfig) function will search for any `dev` environment specific configuration (i.e. any file with name *app-config.`dev`.json* in the same directory, where it finds the original *app-config.json*). If it finds the additional file, it loads the details & overwrite anything, that matches with the base configuration or add anything, that is not present. i.e.
+`USER_NAME` & `USER_PASSWORD` are set through environment variable. This will replace the placeholders `${USER_NAME}` & `${USER_PASSWORD}` in _app-config.json_. The [`environment`](#env) is not specified. Hence, it'll be set as default value `dev`. Now, the [`loadConfig`](#loadconfig) function will search for any `dev` environment specific configuration (i.e. any file with name _app-config.`dev`.json_ in the same directory, where it finds the original _app-config.json_). If it finds the additional file, it loads the details & overwrite anything, that matches with the base configuration or add anything, that is not present. i.e.
 
 - `"baseKey": "baseValue"` becomes `"baseKey": "devValue"`
 - additional `"someDevKey": "someDevValue"` key is added
@@ -133,6 +134,7 @@ let { parsed, error } = loadConfig(true, { path: 'app-config.json' });
 console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
 console.log(`url: ${process.appConfig.url}`);
 ```
+
 ```bash
 # execute: for  loadConfig(true, { path: 'app-config.json' })
 NODE_ENV=test USER_NAME=TestUser USER_PASSWORD=P@ssw0rd node index.js
@@ -225,9 +227,9 @@ more in [`Configurations`](#Configurations)
 }
 ```
 
-If it succeeds to load the configuration file & to parse the information containing within, it sets the `process.appConfig` with the value & will return with an Object with 
+If it succeeds to load the configuration file & to parse the information containing within, it sets the `process.appConfig` with the value & will return with an Object with
 
-- `parsed` key with the same value as `process.appConfig`. 
+- `parsed` key with the same value as `process.appConfig`.
 - `error` key, which is `null` if succeeds or the error details if fails.
 
 #### Configurations
@@ -240,7 +242,7 @@ The [`options`](#options) setup.
 
 - default: `false`
 
-Set it `true` to turn on logging to help debug why certain things are not working as expected. Can be turned on [globally](<#debug-1>).
+Set it `true` to turn on logging to help debug why certain things are not working as expected. Can be turned on [globally](#debug-1).
 
 ###### encoding
 
@@ -331,16 +333,16 @@ db.connect(process.appConfig.url);
 
 - syntax: setParser(customType, customParser, deafultFileName = null, resetType = false)
 
-  - *customType* - {type: `string`} It generally represents the file extension
+  - _customType_ - {type: `string`} It generally represents the file extension
 
-  - *customParser* - {type: [`IParser`](#IParser)} An [`IParser`](#IParser) implementation
+  - _customParser_ - {type: [`IParser`](#iparser)} An [`IParser`](#iparser) implementation
 
-  - *deafultFileName* - {type: `string`, default: `null`} (optional) default configurtion filename (without extension)
+  - _deafultFileName_ - {type: `string`, default: `null`} (optional) default configurtion filename (without extension)
 
-  - *resetType* - {type: `Boolean`} (optional) make the supplied customType as the default *type* when the config.loadConfig() runs next time
+  - _resetType_ - {type: `Boolean`} (optional) make the supplied customType as the default _type_ when the config.loadConfig() runs next time
 
 ```javascript
-  // ** somewhere.js **
+// ** somewhere.js **
 const { loadConfig, setParser } = require('@terran-source/dotconfig');
 const customParser = require('/path/to/custom-parser'); // custom-parser should implement IParser
 
@@ -361,8 +363,6 @@ loadConfig(true);
 // Now process.appConfig is available
 db.connect(process.appConfig.url);
 ```
-
-  
 
 #### debug()
 
@@ -387,7 +387,7 @@ const dotconfig = require('@terran-source/dotconfig');
 let result = dotconfig.loadConfig({
   debug: true, // globally turn it on
   env: 'test', // globally set environement
-  path: 'app-config.json' // not affecting next call
+  path: 'app-config.json', // not affecting next call
 });
 // start using process.appConfig or result.parsed
 
