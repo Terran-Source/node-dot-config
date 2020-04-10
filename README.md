@@ -331,13 +331,13 @@ db.connect(process.appConfig.url);
 
 #### setParser()
 
-- syntax: setParser(customType, customParser, deafultFileName = null, resetType = false)
+- syntax: setParser(customType, customParser, defaultFileName = null, resetType = false)
 
   - _customType_ - {type: `string`} It generally represents the file extension
 
   - _customParser_ - {type: [`IParser`](#iparser)} An [`IParser`](#iparser) implementation
 
-  - _deafultFileName_ - {type: `string`, default: `null`} (optional) default configurtion filename (without extension)
+  - _defaultFileName_ - {type: `string`, default: `null`} (optional) default configurtion filename (without extension)
 
   - _resetType_ - {type: `Boolean`} (optional) make the supplied customType as the default _type_ when the config.loadConfig() runs next time
 
