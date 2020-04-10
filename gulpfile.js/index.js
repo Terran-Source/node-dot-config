@@ -20,10 +20,10 @@ const excludedDirectories = [
   'gulpfile.js',
   '.vs',
   '.vscode',
-  '.github'
+  '.github',
 ];
-const excludes = dirs => dirs.map(dir => `!.${safeDir(dir)}/**`);
-const safeDir = dir =>
+const excludes = (dirs) => dirs.map((dir) => `!.${safeDir(dir)}/**`);
+const safeDir = (dir) =>
   !dir
     ? ''
     : '.' === dir
@@ -31,17 +31,17 @@ const safeDir = dir =>
     : dir.toString().startsWith('/')
     ? dir
     : `/${dir}`;
-const scriptDir = dir => [
+const scriptDir = (dir) => [
   `.${safeDir(dir)}/**/*.${scriptExt}`,
-  `.${safeDir(dir)}/**/.*/**/*.${scriptExt}`
+  `.${safeDir(dir)}/**/.*/**/*.${scriptExt}`,
 ];
-const copyDir = dir => [
+const copyDir = (dir) => [
   `.${safeDir(dir)}/**`,
   `.${safeDir(dir)}/**/.*`,
   `.${safeDir(dir)}/**/.*/**`,
-  ...scriptDir(dir).map(d => `!${d}`)
+  ...scriptDir(dir).map((d) => `!${d}`),
 ];
-const outputDir = dir => `.${safeDir(outputDirectory)}${safeDir(dir)}`;
+const outputDir = (dir) => `.${safeDir(outputDirectory)}${safeDir(dir)}`;
 let allExcluded = [];
 const compressScripts = (dir, isCustom) =>
   require(`./${compressJob}`)(
@@ -55,9 +55,9 @@ const copyScripts = (dir, isCustom) =>
     [...copyDir(dir), ...allExcluded],
     outputDir(dir)
   );
-const dirTasks = dirs => [
-  ...dirs.map(dir => `${compressJob}-${dir}`),
-  ...dirs.map(dir => `${copyJob}-${dir}`)
+const dirTasks = (dirs) => [
+  ...dirs.map((dir) => `${compressJob}-${dir}`),
+  ...dirs.map((dir) => `${copyJob}-${dir}`),
 ];
 const prepareTasks = (...dirs) => {
   dirs.forEach(compressScripts);
@@ -72,7 +72,7 @@ compressScripts('.', localJob);
 copyScripts('.', localJob);
 
 // clean output directory
-task('clean', cb => {
+task('clean', (cb) => {
   del.sync(outputDirectory, { force: true });
   cb();
 });
