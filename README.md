@@ -6,7 +6,7 @@ App configuration made simple for Node.js
 
 Supports:
 
-1. app configuration file of type `json` or `env` (custom type parser's can also be implemented through implementing [`IParser`](#iparser) & using [`setparser`](#setParser))
+1. app configuration file of type `json` or `env` (custom type parser can also be implemented through implementing [`IParser`](#iparser) & using [`setparser`](#setparser))
 2. [`Environment`](#env) specific configuration overloading
 3. Now with the power of [interpolate-json](https://www.npmjs.com/package/interpolate-json) to support interpolation (or parameter substitution) inside app-configuration (strongly recommend to go through the [documentation](https://www.npmjs.com/package/interpolate-json) to know the full power of interpolation)
 
@@ -25,7 +25,7 @@ yarn add @terran-source/dotconfig
 #### Declaration
 
 ```javascript
-// declare the varible at the beginning
+// declare the variable at the beginning
 const { loadConfig } = require('@terran-source/dotconfig');
 ```
 
@@ -80,7 +80,7 @@ const { loadConfig } = require('@terran-source/dotconfig');
 }
 
 // ** index.js **
-// declare the varible at the beginning
+// declare the variable at the beginning
 const { loadConfig } = require('@terran-source/dotconfig');
 
 // load process.appConfig
@@ -153,6 +153,75 @@ parsed: {
 url: https://testuser:P%40ssw0rd@test.example.com:8080
 ```
 
+#### env
+
+```javascript
+/**
+*    App Directory structure
+*
+*    app/
+*     | -- package.json
+*     | -- index.js
+*     | -- .env
+*     | -- dev.env
+*     | -- test.env
+*     | -- prod.env
+*
+*/
+
+// ** .env **
+key = "value"
+"baseKey"= "baseValue"
+'subKey'="subValue"
+"someKey"= 'someValue'
+
+// ** dev.env **
+devKey=devValue
+"baseKey"= "devValue"
+'subKey'="subDevValue"
+"someKey"= 'someDevValue'
+
+// ** test.env **
+testKey=testValue
+"baseKey"= "testValue"
+'subKey'="subTestValue"
+"someKey"= 'someTestValue'
+
+// ** prod.env **
+"baseKey"= "${BASE_KEY}"
+'subKey'="${SUB_KEY}"
+"someKey"= '${SOME_KEY}'
+
+// ** index.js **
+// declare the variable at the beginning
+const { loadConfig } = require('@terran-source/dotconfig');
+
+// load process.appConfig
+let { parsed, error } = loadConfig(true, { path: '.env' });
+
+if (error) {
+  console.log(error);
+}
+
+// now either use parsed or process.appConfig (recommended)
+console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
+console.log(`baseKey: ${process.appConfig.baseKey}`);
+```
+For the Production environment, set the proper `ENVIRONMENT_VARIABLE` to be interpolated.
+
+```bash
+# execute: for  loadConfig(true, { path: '.env' })
+NODE_ENV=prod BASE_KEY='some base key' SUB_KEY='some sub key' SOME_KEY='some other key' node index.js
+# output:
+parsed: {
+  "key": "value",
+  "baseKey": "some base key",
+  "subKey": "some sub key",
+  "someKey": "some other key"
+}
+baseKey: some base key
+```
+
 ## Definition
 
 Syntax: `loadConfig([true | env | file.extension], options);`
@@ -214,7 +283,7 @@ loadConfig('app-config.json');
 }
 ```
 
-more in [`Configurations`](#Configurations)
+more in [`Configurations`](#configurations)
 
 #### returns:
 
@@ -256,7 +325,7 @@ The encoding of the configuration file, supplied in [`path`](#path).
 - type: `string`
 - default: `dev`
 
-In a multi-environment setup (e.g. dev, test, uat, prod), this is the specifier for environment type. In practical case, it seems more logical to not set this one through [`options`](#options), but to set the `NODE_ENV` environment variable and pass true as first parameter to [`loadConfig`](#Definition) function (see [Example](#boolean-true)).
+In a multi-environment setup (e.g. dev, test, uat, prod), this is the specifier for environment type. In practical case, it seems more logical to not set this one through [`options`](#options), but to set the `NODE_ENV` environment variable and pass true as first parameter to [`loadConfig`](#definition) function (see [Example](#boolean-true)).
 
 ###### path
 
@@ -269,20 +338,20 @@ The path of the configuration file. It can either be a relative path or an absol
 
 - type: `string`
 - default: `json`
-- supported types: `json`, ~`env`~ (env development undergoing)
+- supported types: `json`, `env`
 
 The configuration file extension.
 
 ### Functions
 
 ```javascript
-// When declared as a varible at the beginning
+// When declared as a variable at the beginning
 const dotconfig = require('@terran-source/dotconfig');
 ```
 
 #### loadConfig()
 
-Described so far since [`Declaration`](#Declaration) & [`Definition`](#Definition).
+Described so far since [`Declaration`](#declaration) & [`Definition`](#definition).
 
 ```javascript
 // Syntax I
@@ -337,7 +406,7 @@ db.connect(process.appConfig.url);
 
   - _customParser_ - {type: [`IParser`](#iparser)} An [`IParser`](#iparser) implementation
 
-  - _defaultFileName_ - {type: `string`, default: `null`} (optional) default configurtion filename (without extension)
+  - _defaultFileName_ - {type: `string`, default: `null`} (optional) default configuration filename (without extension)
 
   - _resetType_ - {type: `Boolean`} (optional) make the supplied customType as the default _type_ when the config.loadConfig() runs next time
 
@@ -349,7 +418,7 @@ const customParser = require('/path/to/custom-parser'); // custom-parser should 
 // define customParser for customType & make it default
 setParser('customType', customParser, 'custom-config-file', true);
 
-// The following commad now loads
+// The following command now loads
 //   - `custom-config-file.customType`
 //   - `custom-config-file.dev.customType`
 loadConfig();
@@ -386,12 +455,12 @@ const dotconfig = require('@terran-source/dotconfig');
 // do some custom job
 let result = dotconfig.loadConfig({
   debug: true, // globally turn it on
-  env: 'test', // globally set environement
+  env: 'test', // globally set environment
   path: 'app-config.json', // not affecting next call
 });
 // start using process.appConfig or result.parsed
 
-let result2 = dotconfig.loadConfig(); // `dubug` is still set as true, `env` is still 'test', but, `path` will be default, i.e. `config.json`
+let result2 = dotconfig.loadConfig(); // `debug` is still set as true, `env` is still 'test', but, `path` will be default, i.e. `config.json`
 
 // now if you want to reset debug & all other options
 interpolation.reset();
