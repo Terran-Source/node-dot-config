@@ -23,7 +23,13 @@ const excludedDirectories = [
   '.github',
   '.git',
 ];
-const excludedFiles = ['.gitignore', '.editorconfig', '.*rc', '.travis.yml'];
+const excludedFiles = [
+  '.gitignore',
+  '.editorconfig',
+  '.*rc',
+  '.travis.yml',
+  'CHANGELOG.md',
+];
 const sanitizeItems = ['yarn.lock'];
 const excludes = (dirs, files) => [
   ...dirs.map((dir) => `!.${safeDir(dir)}/**`),
