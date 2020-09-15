@@ -1,6 +1,6 @@
-# dot-config [![NPM version](https://img.shields.io/npm/v/dot-config.svg?style=plastic)](https://www.npmjs.com/package/dot-config)
+# node-config [![NPM version](https://img.shields.io/npm/v/node-config.svg?style=plastic)](https://www.npmjs.com/package/node-config)
 
-[![Travis (.org)](https://img.shields.io/travis/Terran-Source/node-dot-config?logo=travis&style=plastic)](https://travis-ci.org/Terran-Source/node-dot-config) [![node](https://img.shields.io/node/v/dot-config?logo=nodejs&style=plastic)](https://www.npmjs.com/package/dot-config) [![GitHub](https://img.shields.io/github/license/Terran-Source/node-dot-config?logo=github&style=plastic)](LICENSE)
+[![Travis (.org)](https://img.shields.io/travis/Terran-Source/node-dot-config?logo=travis&style=plastic)](https://travis-ci.org/Terran-Source/node-dot-config) [![node](https://img.shields.io/node/v/node-config?logo=nodejs&style=plastic)](https://www.npmjs.com/package/node-config) [![GitHub](https://img.shields.io/github/license/Terran-Source/node-dot-config?logo=github&style=plastic)](LICENSE)
 
 App configuration made simple for Node.js (Previously known as `@terran-source/dotconfig`)
 
@@ -14,10 +14,10 @@ Supports:
 
 ```bash
 # with npm
-npm install dot-config
+npm install node-config
 
 # or with Yarn
-yarn add dot-config
+yarn add node-config
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ yarn add dot-config
 
 ```javascript
 // declare the variable at the beginning
-const { loadConfig } = require('dot-config');
+const { loadConfig } = require('node-config');
 ```
 
 #### json
@@ -81,7 +81,7 @@ const { loadConfig } = require('dot-config');
 
 // ** index.js **
 // declare the variable at the beginning
-const { loadConfig } = require('dot-config');
+const { loadConfig } = require('node-config');
 
 // load process.appConfig
 let { parsed, error } = loadConfig('app-config.json');
@@ -194,7 +194,7 @@ testKey=testValue
 
 // ** index.js **
 // declare the variable at the beginning
-const { loadConfig } = require('dot-config');
+const { loadConfig } = require('node-config');
 
 // load process.appConfig
 let { parsed, error } = loadConfig(true, { path: '.env' });
@@ -264,7 +264,7 @@ The application environment name, which to load the configuration file for. Shou
 The configuration file path (either relative or absolute).
 
 ```javascript
-const { loadConfig } = require('dot-config');
+const { loadConfig } = require('node-config');
 loadConfig('app-config.json');
 ```
 
@@ -346,7 +346,7 @@ The configuration file extension.
 
 ```javascript
 // When declared as a variable at the beginning
-const dotconfig = require('dot-config');
+const dotconfig = require('node-config');
 ```
 
 #### loadConfig()
@@ -355,11 +355,11 @@ Described so far since [`Declaration`](#declaration) & [`Definition`](#definitio
 
 ```javascript
 // Syntax I
-const dotconfig = require('dot-config');
+const dotconfig = require('node-config');
 dotconfig.loadConfig(opt);
 
 // Syntax II
-const { loadConfig } = require('dot-config');
+const { loadConfig } = require('node-config');
 loadConfig(opt);
 ```
 
@@ -369,7 +369,7 @@ IParser lets others to implement a custom type of parser (like toml, xml etc.)
 
 ```javascript
 // ** custom-parser.js **
-const { IParser } = require('dot-config');
+const { IParser } = require('node-config');
 
 // declare a class that extends IParser
 class CustomParseClass extends IParser {
@@ -387,7 +387,7 @@ class CustomParseClass extends IParser {
 module.exports = new CustomParseClass();
 
 // ** somewhere.js **
-const { loadConfig, setParser } = require('dot-config');
+const { loadConfig, setParser } = require('node-config');
 const customParser = require('/path/to/custom-parser');
 
 // define customParser for customType
@@ -412,7 +412,7 @@ db.connect(process.appConfig.url);
 
 ```javascript
 // ** somewhere.js **
-const { loadConfig, setParser } = require('dot-config');
+const { loadConfig, setParser } = require('node-config');
 const customParser = require('/path/to/custom-parser'); // custom-parser should implement IParser
 
 // define customParser for customType & make it default
@@ -439,7 +439,7 @@ Globally turn on [`debug`](#debug) flag.
 
 ```javascript
 // to globally turn it on
-const dotconfig = require('dot-config').debug();
+const dotconfig = require('node-config').debug();
 
 // to globally turn off
 dotconfig.debug(false);
@@ -450,7 +450,7 @@ dotconfig.debug(false);
 Resets the [options](#options).
 
 ```javascript
-const dotconfig = require('dot-config');
+const dotconfig = require('node-config');
 
 // do some custom job
 let result = dotconfig.loadConfig({
