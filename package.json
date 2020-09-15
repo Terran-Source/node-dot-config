@@ -10,21 +10,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Terran-Source/dotconfig.git"
+    "url": "git+https://github.com/Terran-Source/node-dot-config.git"
   },
   "keywords": [
     "configuration",
     "config",
     "dotconfig",
+    "dot-config",
     "node",
     "nodejs"
   ],
   "author": "Tamal Patra <patra.tamal@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Terran-Source/dotconfig/issues"
+    "url": "https://github.com/Terran-Source/node-dot-config/issues"
   },
-  "homepage": "https://github.com/Terran-Source/dotconfig#readme",
+  "homepage": "https://github.com/Terran-Source/node-dot-config#readme",
   "publishConfig": {
     "access": "public"
   },
