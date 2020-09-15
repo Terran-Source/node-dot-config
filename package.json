@@ -1,6 +1,6 @@
 {
   "name": "dots-config",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "App configuration made simple for Node.js",
   "main": "app.js",
   "scripts": {
