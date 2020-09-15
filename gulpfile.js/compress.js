@@ -1,6 +1,6 @@
 'use strict';
 
-const { BadRequest } = require('../lib/exceptions');
+const { BadRequest } = require('custom-exception');
 const extend = require('extend');
 const { task, src, dest } = require('gulp');
 const terser = require('gulp-terser');
@@ -46,10 +46,9 @@ const main = (taskName, srcFiles, outputDirectory, terserOptions = {}) => {
           message = `${taskName} task completed successfully`;
           console.log(message);
         }
-        return success ? Promise.resolve(message) : Promise.reject(message);
+        cb();
       }
     );
-    cb();
   });
 };
 

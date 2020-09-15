@@ -2,7 +2,7 @@ const chai = require('chai');
 
 before(() => {
   // global arrange
-  this.config = require('../config');
+  this.config = require('../app');
 });
 
 beforeEach(() => {

@@ -28,6 +28,7 @@ script:
 before_deploy:
   - gulp preBuild
   - cd dist
+  - cd dist
 deploy:
   edge: true
   cleanup: false

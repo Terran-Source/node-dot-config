@@ -1,6 +1,6 @@
 'use strict';
 
-const { BadRequest } = require('../lib/exceptions');
+const { BadRequest } = require('custom-exception');
 const { task, src, dest } = require('gulp');
 const { pipeline } = require('readable-stream');
 
@@ -30,9 +30,8 @@ const main = (taskName, srcFiles, outputDirectory) => {
         message = `${taskName} task completed successfully`;
         console.log(message);
       }
-      return success ? Promise.resolve(message) : Promise.reject(message);
+      cb();
     });
-    cb();
   });
 };
 

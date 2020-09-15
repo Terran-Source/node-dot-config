@@ -1,8 +1,8 @@
-# dotconfig [![NPM version](https://img.shields.io/npm/v/@terran-source/dotconfig.svg?style=plastic)](https://www.npmjs.com/package/@terran-source/dotconfig)
+# dot-config [![NPM version](https://img.shields.io/npm/v/dot-config.svg?style=plastic)](https://www.npmjs.com/package/dot-config)
 
-[![Travis (.org)](https://img.shields.io/travis/Terran-Source/dotconfig?logo=travis&style=plastic)](https://travis-ci.org/Terran-Source/dotconfig) [![node](https://img.shields.io/node/v/@terran-source/dotconfig?logo=nodejs&style=plastic)](https://www.npmjs.com/package/@terran-source/dotconfig) [![GitHub](https://img.shields.io/github/license/Terran-Source/dotconfig?logo=github&style=plastic)](LICENSE)
+[![Travis (.org)](https://img.shields.io/travis/Terran-Source/node-dot-config?logo=travis&style=plastic)](https://travis-ci.org/Terran-Source/node-dot-config) [![node](https://img.shields.io/node/v/dot-config?logo=nodejs&style=plastic)](https://www.npmjs.com/package/dot-config) [![GitHub](https://img.shields.io/github/license/Terran-Source/node-dot-config?logo=github&style=plastic)](LICENSE)
 
-App configuration made simple for Node.js
+App configuration made simple for Node.js (Previously known as `@terran-source/dotconfig`)
 
 Supports:
 
@@ -14,10 +14,10 @@ Supports:
 
 ```bash
 # with npm
-npm install @terran-source/dotconfig
+npm install dot-config
 
 # or with Yarn
-yarn add @terran-source/dotconfig
+yarn add dot-config
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ yarn add @terran-source/dotconfig
 
 ```javascript
 // declare the variable at the beginning
-const { loadConfig } = require('@terran-source/dotconfig');
+const { loadConfig } = require('dot-config');
 ```
 
 #### json
@@ -81,7 +81,7 @@ const { loadConfig } = require('@terran-source/dotconfig');
 
 // ** index.js **
 // declare the variable at the beginning
-const { loadConfig } = require('@terran-source/dotconfig');
+const { loadConfig } = require('dot-config');
 
 // load process.appConfig
 let { parsed, error } = loadConfig('app-config.json');
@@ -194,7 +194,7 @@ testKey=testValue
 
 // ** index.js **
 // declare the variable at the beginning
-const { loadConfig } = require('@terran-source/dotconfig');
+const { loadConfig } = require('dot-config');
 
 // load process.appConfig
 let { parsed, error } = loadConfig(true, { path: '.env' });
@@ -264,7 +264,7 @@ The application environment name, which to load the configuration file for. Shou
 The configuration file path (either relative or absolute).
 
 ```javascript
-const { loadConfig } = require('@terran-source/dotconfig');
+const { loadConfig } = require('dot-config');
 loadConfig('app-config.json');
 ```
 
@@ -346,7 +346,7 @@ The configuration file extension.
 
 ```javascript
 // When declared as a variable at the beginning
-const dotconfig = require('@terran-source/dotconfig');
+const dotconfig = require('dot-config');
 ```
 
 #### loadConfig()
@@ -355,11 +355,11 @@ Described so far since [`Declaration`](#declaration) & [`Definition`](#definitio
 
 ```javascript
 // Syntax I
-const dotconfig = require('@terran-source/dotconfig');
+const dotconfig = require('dot-config');
 dotconfig.loadConfig(opt);
 
 // Syntax II
-const { loadConfig } = require('@terran-source/dotconfig');
+const { loadConfig } = require('dot-config');
 loadConfig(opt);
 ```
 
@@ -369,7 +369,7 @@ IParser lets others to implement a custom type of parser (like toml, xml etc.)
 
 ```javascript
 // ** custom-parser.js **
-const { IParser } = require('@terran-source/dotconfig');
+const { IParser } = require('dot-config');
 
 // declare a class that extends IParser
 class CustomParseClass extends IParser {
@@ -387,7 +387,7 @@ class CustomParseClass extends IParser {
 module.exports = new CustomParseClass();
 
 // ** somewhere.js **
-const { loadConfig, setParser } = require('@terran-source/dotconfig');
+const { loadConfig, setParser } = require('dot-config');
 const customParser = require('/path/to/custom-parser');
 
 // define customParser for customType
@@ -412,7 +412,7 @@ db.connect(process.appConfig.url);
 
 ```javascript
 // ** somewhere.js **
-const { loadConfig, setParser } = require('@terran-source/dotconfig');
+const { loadConfig, setParser } = require('dot-config');
 const customParser = require('/path/to/custom-parser'); // custom-parser should implement IParser
 
 // define customParser for customType & make it default
@@ -439,7 +439,7 @@ Globally turn on [`debug`](#debug) flag.
 
 ```javascript
 // to globally turn it on
-const dotconfig = require('@terran-source/dotconfig').debug();
+const dotconfig = require('dot-config').debug();
 
 // to globally turn off
 dotconfig.debug(false);
@@ -450,7 +450,7 @@ dotconfig.debug(false);
 Resets the [options](#options).
 
 ```javascript
-const dotconfig = require('@terran-source/dotconfig');
+const dotconfig = require('dot-config');
 
 // do some custom job
 let result = dotconfig.loadConfig({
@@ -463,5 +463,5 @@ let result = dotconfig.loadConfig({
 let result2 = dotconfig.loadConfig(); // `debug` is still set as true, `env` is still 'test', but, `path` will be default, i.e. `config.json`
 
 // now if you want to reset debug & all other options
-interpolation.reset();
+dotconfig.reset();
 ```

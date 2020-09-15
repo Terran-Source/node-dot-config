@@ -21,8 +21,14 @@ const excludedDirectories = [
   '.vs',
   '.vscode',
   '.github',
+  '.git',
 ];
-const excludes = (dirs) => dirs.map((dir) => `!.${safeDir(dir)}/**`);
+const excludedFiles = ['.gitignore', '.editorconfig', '.*rc', '.travis.yml'];
+const sanitizeItems = ['yarn.lock'];
+const excludes = (dirs, files) => [
+  ...dirs.map((dir) => `!.${safeDir(dir)}/**`),
+  ...files.map((file) => `!./**${safeDir(file)}`),
+];
 const safeDir = (dir) =>
   !dir
     ? ''
@@ -67,7 +73,7 @@ const prepareTasks = (...dirs) => {
 // prepare for all build & test tasks
 prepareTasks(sourceDirectories, testDirectories);
 // prepare for everything else left
-allExcluded = excludes(excludedDirectories);
+allExcluded = excludes(excludedDirectories, excludedFiles);
 compressScripts('.', localJob);
 copyScripts('.', localJob);
 
@@ -76,10 +82,15 @@ task('clean', (cb) => {
   del.sync(outputDirectory, { force: true });
   cb();
 });
+task('sanitize', (cb) => {
+  del.sync(sanitizeItems.map(outputDir), { force: true });
+  cb();
+});
 
 const preBuild = series(
   'clean',
-  parallel(...dirTasks(sourceDirectories), ...dirTasks(localDirectories))
+  parallel(...dirTasks(sourceDirectories), ...dirTasks(localDirectories)),
+  'sanitize'
 );
 const preTest = series(
   'clean',
