@@ -1,6 +1,6 @@
 {
   "name": "dot-config",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "description": "App configuration made simple for Node.js",
   "main": "app.js",
   "scripts": {
@@ -29,15 +29,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "contributors": [
-    {
-      "name": "Tamal Patra",
-      "email": "patra.tamal@gmail.com",
-      "url": "https://sourcerer.io/turn-a-round",
-      "contributions": 100,
-      "hireable": true
-    }
-  ],
+  "contributors": [{
+    "name": "Tamal Patra",
+    "email": "patra.tamal@gmail.com",
+    "url": "https://sourcerer.io/turn-a-round",
+    "contributions": 100,
+    "hireable": true
+  }],
   "dependencies": {
     "custom-exception": "^0.1.2",
     "extend": "^3.0.2",
