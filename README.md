@@ -10,6 +10,17 @@ Supports:
 2. [`Environment`](#env) specific configuration overloading
 3. Now with the power of [interpolate-json](https://www.npmjs.com/package/interpolate-json) to support interpolation (or parameter substitution) inside app-configuration (strongly recommend to go through the [documentation](https://www.npmjs.com/package/interpolate-json) to know the full power of interpolation)
 
+> NOTE: There is one major breaking change from v1.x
+> 
+> previously: `loadConfig()` used to return a combined object `{ parsed, error }`
+> ```javascript
+> let { parsed, error } = loadConfig('app-config.json');
+> ```
+> now: it only returns the object containing the app-configuration
+> ```javascript
+> let appConfig = loadConfig('app-config.json');
+> ```
+
 ## Install
 
 ```bash
@@ -84,22 +95,28 @@ const { loadConfig } = require('dots-config');
 const { loadConfig } = require('dots-config');
 
 // load process.appConfig
-let { parsed, error } = loadConfig('app-config.json');
-
-if (error) {
-  console.log(error);
+try {
+let appConfig = loadConfig('app-config.json');
+} catch (ex) {
+  console.log(ex);
 }
 
-// now either use parsed or process.appConfig (recommended)
-console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
-console.log(`url: ${process.appConfig.url}`);
+/** 
+ * now use any one of
+ *    - `appConfig` or
+ *    - `process.env.appConfig` or
+ *    - `process.appConfig` (recommended)
+ *  virtually they are all set to same object
+*/
+console.log(`appConfig: ${JSON.stringify(appConfig, null, 2)}`); // using `appConfig`
+console.log(`url: ${process.appConfig.url}`); // using `process.appConfig`
 ```
 
 ```bash
 # execute using:
 USER_NAME=DevUser USER_PASSWORD=P@ssw0rd node index.js
 # output:
-parsed: {
+appConfig: {
   "scheme": "http",
   "server": "localhost",
   "port": "8080",
@@ -124,14 +141,14 @@ Let's break it up:
 To load environment specific configurations:
 
 ```javascript
-let { parsed, error } = loadConfig({ env: 'test', path: 'app-config.json' });
+let appConfig = loadConfig({ env: 'test', path: 'app-config.json' });
 // or
-let { parsed, error } = loadConfig('test', { path: 'app-config.json' });
+let appConfig = loadConfig('test', { path: 'app-config.json' });
 // or
 // set Environment variable `NODE_ENV=test` and then run (recommended)
-let { parsed, error } = loadConfig(true, { path: 'app-config.json' });
+let appConfig = loadConfig(true, { path: 'app-config.json' });
 
-console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
+console.log(`appConfig: ${JSON.stringify(appConfig, null, 2)}`);
 console.log(`url: ${process.appConfig.url}`);
 ```
 
@@ -139,7 +156,7 @@ console.log(`url: ${process.appConfig.url}`);
 # execute: for  loadConfig(true, { path: 'app-config.json' })
 NODE_ENV=test USER_NAME=TestUser USER_PASSWORD=P@ssw0rd node index.js
 # output:
-parsed: {
+appConfig: {
   "scheme": "https",
   "server": "test.example.com",
   "port": "8080",
@@ -197,14 +214,14 @@ testKey=testValue
 const { loadConfig } = require('dots-config');
 
 // load process.appConfig
-let { parsed, error } = loadConfig(true, { path: '.env' });
-
-if (error) {
-  console.log(error);
+try {
+let appConfig = loadConfig(true, { path: '.env' });
+} catch (ex) {
+  console.log(ex);
 }
 
-// now either use parsed or process.appConfig (recommended)
-console.log(`parsed: ${JSON.stringify(parsed, null, 2)}`);
+// now either use appConfig or process.appConfig (recommended)
+console.log(`appConfig: ${JSON.stringify(appConfig, null, 2)}`);
 console.log(`baseKey: ${process.appConfig.baseKey}`);
 ```
 For the Production environment, set the proper `ENVIRONMENT_VARIABLE` to be interpolated.
@@ -213,7 +230,7 @@ For the Production environment, set the proper `ENVIRONMENT_VARIABLE` to be inte
 # execute: for  loadConfig(true, { path: '.env' })
 NODE_ENV=prod BASE_KEY='some base key' SUB_KEY='some sub key' SOME_KEY='some other key' node index.js
 # output:
-parsed: {
+appConfig: {
   "key": "value",
   "baseKey": "some base key",
   "subKey": "some sub key",
@@ -287,19 +304,9 @@ more in [`Configurations`](#configurations)
 
 #### returns:
 
-- type: `json`
+- type: `json Object`
 
-```javascript
-{
-  parsed: {}, // same as process.appConfig if succeed
-  error: null // or an Error object with `message` if anything goes wrong
-}
-```
-
-If it succeeds to load the configuration file & to parse the information containing within, it sets the `process.appConfig` with the value & will return with an Object with
-
-- `parsed` key with the same value as `process.appConfig`.
-- `error` key, which is `null` if succeeds or the error details if fails.
+If it succeeds to load the configuration file & to parse the information containing within, it sets the `process.appConfig` with the value & will return with an Object with the same value as `process.appConfig`.
 
 #### Configurations
 
@@ -453,12 +460,12 @@ Resets the [options](#options).
 const dotconfig = require('dots-config');
 
 // do some custom job
-let result = dotconfig.loadConfig({
+let appConfig = dotconfig.loadConfig({
   debug: true, // globally turn it on
   env: 'test', // globally set environment
   path: 'app-config.json', // not affecting next call
 });
-// start using process.appConfig or result.parsed
+// start using process.appConfig or appConfig
 
 let result2 = dotconfig.loadConfig(); // `debug` is still set as true, `env` is still 'test', but, `path` will be default, i.e. `config.json`
 

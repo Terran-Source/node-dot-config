@@ -8,17 +8,17 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig() should return {env: dev} config', function () {
     // act
-    const result = context.config.loadConfig();
+    const appConfig = context.config.loadConfig();
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'devValue');
     expect(process.appConfig)
@@ -30,17 +30,17 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig(test) should return {env: test} config', function () {
     // act
-    const result = context.config.loadConfig('test');
+    const appConfig = context.config.loadConfig('test');
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -52,17 +52,17 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig({env: test}) should return {env: test} config', function () {
     // act
-    const result = context.config.loadConfig({ env: 'test' });
+    const appConfig = context.config.loadConfig({ env: 'test' });
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -76,18 +76,18 @@ describe('#loadConfig for json', function () {
     // arrange
     process.env.NODE_ENV = 'dev';
     // act
-    const result = context.config.loadConfig(true, { env: 'test' });
+    const appConfig = context.config.loadConfig(true, { env: 'test' });
     delete process.env.NODE_ENV;
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -99,17 +99,17 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig("test.ext") should return {env: test} config, even in {env: dev}', function () {
     // act
-    const result = context.config.loadConfig('config.test.json');
+    const appConfig = context.config.loadConfig('config.test.json');
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -123,18 +123,18 @@ describe('#loadConfig for json', function () {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.loadConfig(true);
+    const appConfig = context.config.loadConfig(true);
     delete process.env.NODE_ENV;
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -148,18 +148,18 @@ describe('#loadConfig for json', function () {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.loadConfig();
+    const appConfig = context.config.loadConfig();
     delete process.env.NODE_ENV;
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'devValue');
     expect(process.appConfig)
@@ -173,18 +173,18 @@ describe('#loadConfig for json', function () {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.loadConfig({ env: 'dev' });
+    const appConfig = context.config.loadConfig({ env: 'dev' });
     delete process.env.NODE_ENV;
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'devValue');
     expect(process.appConfig)
@@ -198,18 +198,18 @@ describe('#loadConfig for json', function () {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.loadConfig(true, { env: 'dev' });
+    const appConfig = context.config.loadConfig(true, { env: 'dev' });
     delete process.env.NODE_ENV;
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'devValue');
     expect(process.appConfig)
@@ -221,17 +221,17 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig("test", {env: dev}) should return {env: dev} config', function () {
     // act
-    const result = context.config.loadConfig('test', { env: 'dev' });
+    const appConfig = context.config.loadConfig('test', { env: 'dev' });
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'devValue');
     expect(process.appConfig)
@@ -243,17 +243,17 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig("custom-filename.ext") should return only custom config file', function () {
     // act
-    const result = context.config.loadConfig('cust-config.json');
+    const appConfig = context.config.loadConfig('cust-config.json');
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'baseValue');
     expect(process.appConfig).to.have.deep.property('subKey', {
@@ -262,19 +262,19 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig("custom-filename.ext") for {env: test} should return custom {env: test} config', function () {
     // act
-    const result = context.config.loadConfig('cust-config.json', {
+    const appConfig = context.config.loadConfig('cust-config.json', {
       env: 'test',
     });
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -288,20 +288,20 @@ describe('#loadConfig for json', function () {
     // arrange
     process.env.NODE_ENV = 'test';
     // act
-    const result = context.config.loadConfig(true, {
+    const appConfig = context.config.loadConfig(true, {
       path: 'cust-config.json',
     });
     delete process.env.NODE_ENV;
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -313,20 +313,20 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig({env: test, path: "custom-filename.ext"}) should return custom {env: test} config', function () {
     // act
-    const result = context.config.loadConfig({
+    const appConfig = context.config.loadConfig({
       path: 'cust-config.json',
       env: 'test',
     });
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'testValue');
     expect(process.appConfig)
@@ -338,20 +338,20 @@ describe('#loadConfig for json', function () {
   });
   it('config.loadConfig({env: custom, path: "custom-filename.ext"}) should return custom {env: custom} config', function () {
     // act
-    const result = context.config.loadConfig({
+    const appConfig = context.config.loadConfig({
       path: 'cust-config.json',
       env: 'custom',
     });
     // assert
-    expect(result).to.be.a('config');
+    expect(appConfig).to.be.a('Object');
     console.log(
       `process.appConfig:\n${JSON.stringify(process.appConfig, null, 2)}`
     );
-    expect(result.parsed).to.be.a('Object');
+    expect(appConfig).to.be.a('Object');
     expect(process.appConfig).to.be.a('Object');
     expect(process.appConfig).to.deep.equal(
-      result.parsed,
-      'config.parsed !== process.appConfig'
+      appConfig,
+      'appConfig !== process.appConfig'
     );
     expect(process.appConfig).to.haveOwnProperty('baseKey', 'custom');
     expect(process.appConfig)
