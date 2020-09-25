@@ -41,7 +41,7 @@
   "dependencies": {
     "custom-exception": "^0.1.2",
     "extend": "^3.0.2",
-    "interpolate-json": "^2.1.1",
+    "interpolate-json": "^2.1.2",
     "type-detect": "^4.0.8"
   },
   "devDependencies": {
